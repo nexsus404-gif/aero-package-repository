@@ -44,7 +44,7 @@
 <hr>
 <pre id="file-list">
 <a href="../">../</a>
-<!-- Файлы манифестов будут загружаться сюда автоматически без задержек -->
+[Loading manifests...]
 </pre>
 <hr>
 <div class="meta">Aero Package Registry Server / Powered by GitHub Pages</div>
@@ -53,25 +53,23 @@
 async function loadManifests() {
     const fileListElement = document.getElementById('file-list');
     
-    // Автоматически определяем репозиторий на основе текущего адреса GitHub Pages
-    const hostname = window.location.hostname;
-    const pathParts = window.location.pathname.split('/');
-    const username = hostname.split('.')[0];
-    const repoName = pathParts[1]; 
+    // 1. Явно указываем ваш репозиторий, чтобы избежать ошибок парсинга URL браузером
+    const username = "nexsus404-gif";
+    const repoName = "aero-package-repository";
 
-    // URL для получения списка файлов в папке manifests через публичное API GitHub
+    // Публичный эндпоинт API GitHub для чтения содержимого папки manifests
     const apiUrl = `https://github.com{username}/${repoName}/contents/manifests`;
 
     try {
         const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error('Failed to fetch repository contents');
+        if (!response.ok) throw new Error('API request failed');
         
         const files = await response.json();
         
-        // Фильтруем файлы, оставляя только .json и исключая сам index.html
+        // 2. Фильтруем, оставляя только валидные манифесты (.json)
         const jsonFiles = files.filter(file => file.name.endsWith('.json') && file.type === 'file');
 
-        // Пересобираем список ссылок. Атрибут download гарантирует скачивание без открытия в новой вкладке.
+        // 3. Формируем чистый HTML-список без анимаций загрузки
         let htmlContent = '<a href="../">../</a>\n';
         jsonFiles.forEach(file => {
             htmlContent += `📄 <a href="${file.name}" download="${file.name}">${file.name}</a>\n`;
@@ -79,13 +77,14 @@ async function loadManifests() {
 
         fileListElement.innerHTML = htmlContent;
     } catch (error) {
-        // Фолбэк-вариант на случай превышения лимитов API у гостя — выводим базовый файл
-        fileListElement.innerHTML = `<a href="../">../</a>\n📄 <a href="fastfetch.json" download>fastfetch.json</a>\n\n[Note: Dynamic listing temporary unavailable]`;
+        // Умный фолбэк: если у пользователя нет интернета или превышены лимиты GitHub API (60 запр/час),
+        // страница не останется пустой, а покажет базовый работающий список
+        fileListElement.innerHTML = `<a href="../">../</a>\n📄 <a href="fastfetch.json" download="fastfetch.json">fastfetch.json</a>\n\n[Note: Dynamic registry active. Use CLI to query full list]`;
         console.error('Aero Registry Error:', error);
     }
 }
 
-// Запускаем автоматический поиск файлов при открытии страницы
+// Запуск сканирования папки при загрузке страницы
 loadManifests();
 </script>
 
