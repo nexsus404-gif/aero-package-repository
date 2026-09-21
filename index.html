@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,7 @@
             --text-muted: #86868b;
             --accent-color: #0071e3;
             --border-color: #d2d2d7;
+            --code-bg: #f5f5f7;
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -21,6 +22,7 @@
                 --text-muted: #86868b;
                 --accent-color: #2997ff;
                 --border-color: #424245;
+                --code-bg: #2d2d2d;
             }
         }
         body {
@@ -32,12 +34,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            box-sizing: border-box;
+            max-width: 550px;
         }
         .card {
             background-color: var(--card-bg);
@@ -45,11 +47,14 @@
             padding: 32px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-color);
+        }
+        .header {
             text-align: center;
+            margin-bottom: 28px;
         }
         .logo-area {
-            font-size: 48px;
-            margin-bottom: 16px;
+            font-size: 40px;
+            margin-bottom: 12px;
         }
         h1 {
             font-size: 24px;
@@ -57,30 +62,53 @@
             margin: 0 0 8px 0;
             letter-spacing: -0.5px;
         }
-        p {
+        .subtitle {
             font-size: 14px;
             color: var(--text-muted);
-            line-height: 1.5;
-            margin: 0 0 24px 0;
+            line-height: 1.4;
+            margin: 0;
         }
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 980px;
+        
+        /* File Tree Styles */
+        .tree-container {
+            background-color: var(--code-bg);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-family: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            line-height: 1.6;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
         }
-        .btn:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
+        .tree-folder {
+            color: var(--accent-color);
+            font-weight: bold;
         }
+        .tree-branches {
+            padding-left: 18px;
+            border-left: 1px dashed var(--text-muted);
+            margin-left: 6px;
+            margin-top: 4px;
+        }
+        .tree-file {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: background-color 0.1s ease;
+        }
+        .tree-file:hover {
+            background-color: var(--border-color);
+            color: var(--accent-color);
+        }
+        .tree-file::before {
+            content: "📄 ";
+        }
+        
         .footer {
             margin-top: 24px;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             text-align: center;
         }
@@ -90,15 +118,52 @@
 
 <div class="container">
     <div class="card">
-        <div class="logo-area">📦</div>
-        <h1>Aero Package Repository</h1>
-        <p>Официальный источник манифестов и индексов для пакетного менеджера Aero на macOS.</p>
-        <a href="manifests/fastfetch.json" class="btn" target="_blank">Проверить fastfetch.json</a>
+        <div class="header">
+            <div class="logo-area">💻</div>
+            <h1>Aero Package Registry</h1>
+            <p class="subtitle">Official repository manifest tree</p>
+        </div>
+
+        <!-- File Tree -->
+        <div class="tree-container">
+            <span class="tree-folder">📁 /manifests</span>
+            <div class="tree-branches" id="file-tree">
+                <span style="color: var(--text-muted);">Loading package structure...</span>
+            </div>
+        </div>
     </div>
+    
     <div class="footer">
-        Powered by GitHub Pages & Actions
+        Aero Package Manager • Powered by GitHub Pages & Actions
     </div>
 </div>
+
+<script>
+    async function loadTree() {
+        const treeElement = document.getElementById('file-tree');
+        try {
+            const response = await fetch('manifests/fastfetch.json');
+            if (!response.ok) throw new Error('Load error');
+            
+            await response.json();
+            treeElement.innerHTML = '';
+            
+            const mainFile = document.createElement('a');
+            mainFile.href = 'manifests/fastfetch.json';
+            mainFile.className = 'tree-file';
+            mainFile.target = '_blank';
+            mainFile.innerText = 'fastfetch.json';
+            treeElement.appendChild(mainFile);
+            
+        } catch (error) {
+            treeElement.innerHTML = `
+                <a href="manifests/fastfetch.json" class="tree-file" target="_blank">fastfetch.json</a>
+            `;
+        }
+    }
+    
+    loadTree();
+</script>
 
 </body>
 </html>
