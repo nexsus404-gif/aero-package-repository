@@ -3,8 +3,8 @@
   "description": "Like neofetch, but much faster. Written in C.",
   "versions": {
     "2.31.0": {
-      "url": "https://github.com",
-      "sha256": "замените_на_реальный_sha256_когда_скачаете_файл"
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/Fastfetch_2.68.1/fastfetch-macos-intel.tar.gz",
+      "sha256": "1e9a6ba7474a41b3cc2bb1b923afcf40c749c25bd17dc1e62b64464e7445a534"
     }
   }
 }
