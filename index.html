@@ -2,50 +2,265 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index of /</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero Package Manager | Official Registry</title>
     <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --accent-color: #58a6ff;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --success-color: #2ea44f;
+        }
+
         body {
-            font-family: monospace;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            background-color: #ffffff;
-            color: #000000;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        .badge {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         h1 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 2.8em;
+            margin: 20px 0 10px 0;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        hr {
-            border: 0;
-            border-top: 1px solid #000000;
-            margin: 10px 0;
-        }
-        pre {
-            font-size: 14px;
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
             line-height: 1.5;
         }
-        a {
-            color: #0000ee;
-            text-decoration: none;
+
+        /* Блок с терминалом для копирования команды */
+        .terminal-box {
+            background-color: #010409;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-        a:hover {
-            text-decoration: underline;
+
+        .terminal-text {
+            color: #ff7b72;
+            font-size: 0.95em;
         }
-        .meta {
-            color: #555555;
+        .terminal-text span {
+            color: var(--text-main);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            color: #ffffff;
+            border-color: var(--text-muted);
+            background-color: var(--card-bg);
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #ffffff;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Сетка фич */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(88, 166, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .feature-card h3 {
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Защищенная инфо-панель репозитория */
+        .registry-status {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--success-color);
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success-color);
+        }
+
+        .registry-status p {
+            color: var(--text-muted);
             font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85em;
         }
     </style>
 </head>
 <body>
 
-<h1>Index of /</h1>
-<hr>
-<pre>
-📁 <a href="manifests/index.html">manifests/</a>
-</pre>
-<hr>
-<div class="meta">Aero Package Registry Server / Powered by GitHub Pages</div>
+<header>
+    <span class="badge">Official Core Registry</span>
+    <h1>Aero Package Manager</h1>
+    <p class="subtitle">The ultra-fast, modern binary package manager engineered for Intel-based Mac systems running macOS 12 Monterey and newer.</p>
+    
+    <div class="terminal-box">
+        <div class="terminal-text">curl -sSfL aero.cli.org/install | <span>sh</span></div>
+        <button class="copy-btn" onclick="copyInstallCmd(this)">Copy</button>
+    </div>
+</header>
+
+<div class="container">
+    <div class="section-title">⚡ Architecture & Philosophy</div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Blazing Fast Rust Core</h3>
+            <p>Built completely from scratch using Rust. Aero ensures non-blocking asynchronous operations, zero-cost abstractions, and instant execution routines.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Precompiled Bottles</h3>
+            <p>Skip time-consuming compilation stages. Aero downloads fully isolated, static production-ready binaries with automatic dependency matching.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Intel x86_64 Optimized</h3>
+            <p>Tailored exclusively for Intel Mac configurations, giving older hardware a powerful, modern CLI development environment.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Cryptographic Integrity</h3>
+            <p>Strict SHA-256 checksum validations guard every entry. Built-in security layers isolate the client from repository manipulation.</p>
+        </div>
+    </div>
+
+    <div class="section-title">🔒 Registry Node Access</div>
+    <div class="registry-status">
+        <div class="status-badge">
+            <span class="status-dot"></span> Secure Connection Active
+        </div>
+        <p style="color: #ffffff; font-weight: 500; margin-bottom: 15px;">Direct file navigation is restricted via standard browser clients.</p>
+        <p>This server acts exclusively as an automated backend endpoint for the <code>aero</code> CLI client daemon.</p>
+        <p>To query, discover, or install packages, please interact with the core registry using the toolkit terminal binary.</p>
+    </div>
+</div>
+
+<footer>
+    Aero Package Registry Server • Powered by GitHub Pages & Rust Infrastructure
+</footer>
+
+<script>
+function copyInstallCmd(btn) {
+    navigator.clipboard.writeText("curl -sSfL aero.cli.org/install | sh");
+    btn.innerText = "Copied!";
+    btn.style.borderColor = "var(--success-color)";
+    btn.style.color = "var(--success-color)";
+    setTimeout(() => {
+        btn.innerText = "Copy";
+        btn.style.borderColor = "var(--border-color)";
+        btn.style.color = "var(--text-muted)";
+    }, 2000);
+}
+</script>
 
 </body>
 </html>
