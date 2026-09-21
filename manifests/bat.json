@@ -3,7 +3,7 @@
   "description": "A cat(1) clone with syntax highlighting and Git integration",
   "versions": {
     "0.26.1": {
-      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/bat_0.26.1/bat-macos-intel.tar.gz",
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/bat-macos-intel.tar.gz",
       "sha256": "830d63b0bba1fa040542ec569e3cf77f60d3356b9de75116a344b061e0894245"
     }
   }
