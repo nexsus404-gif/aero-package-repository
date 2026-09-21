@@ -1,0 +1,10 @@
+{
+  "name": "fastfetch",
+  "description": "Like neofetch, but much faster. Written in C.",
+  "versions": {
+    "2.31.0": {
+      "url": "https://github.com",
+      "sha256": "замените_на_реальный_sha256_когда_скачаете_файл"
+    }
+  }
+}
