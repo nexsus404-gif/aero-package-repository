@@ -4,7 +4,7 @@
   "versions": {
     "15.2.0": {
       "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/ripgrep-macos-intel.tar.gz",
-      "sha256": "af7825fcc69a2afc7a7aea55fc9af90e26421d8f20fe59df32e233c0b8a231c1"
+      "sha256": "af7825fcc69a2afc7a7aea55fc9af90e26421d8f20fe59df32e233c0b8a231c1",
       "bin_name": "rg"
     }
   }
