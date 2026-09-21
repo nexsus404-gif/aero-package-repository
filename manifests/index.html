@@ -36,83 +36,57 @@
             color: #555555;
             font-size: 0.9em;
         }
-        /* Стиль для анимации и текста загрузки */
-        .progress-text {
-            color: #008800;
-            font-weight: bold;
-            margin-left: 10px;
-        }
     </style>
 </head>
 <body>
 
 <h1>Index of /manifests/</h1>
 <hr>
-<pre>
+<pre id="file-list">
 <a href="../">../</a>
-📄 <a onclick="downloadWithProgress('fastfetch.json', this)">fastfetch.json</a><span id="fastfetch.json-progress" class="progress-text"></span>
+<!-- Файлы манифестов будут загружаться сюда автоматически без задержек -->
 </pre>
 <hr>
 <div class="meta">Aero Package Registry Server / Powered by GitHub Pages</div>
 
 <script>
-function downloadWithProgress(fileName, element) {
-    // Чтобы пользователь не кликал много раз во время загрузки
-    if (element.style.pointerEvents === 'none') return;
-    element.style.pointerEvents = 'none';
+async function loadManifests() {
+    const fileListElement = document.getElementById('file-list');
     
-    const progressSpan = document.getElementById(fileName + '-progress');
-    progressSpan.innerText = ' [Connecting...]';
+    // Автоматически определяем репозиторий на основе текущего адреса GitHub Pages
+    const hostname = window.location.hostname;
+    const pathParts = window.location.pathname.split('/');
+    const username = hostname.split('.')[0];
+    const repoName = pathParts[1]; 
 
-    // Используем XMLHttpRequest для отслеживания загрузки в байтах
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', fileName, true);
-    xhr.responseType = 'blob'; // Качаем как бинарный объект
+    // URL для получения списка файлов в папке manifests через публичное API GitHub
+    const apiUrl = `https://github.com{username}/${repoName}/contents/manifests`;
 
-    // Событие продвижения загрузки
-    xhr.onprogress = function(event) {
-        if (event.lengthComputable) {
-            // Если сервер передал размер файла, показываем Прогресс / Всего
-            progressSpan.innerText = ` [Downloading: ${event.loaded} / ${event.total} Bytes]`;
-        } else {
-            // Если точный размер неизвестен, просто инкрементируем скачанные байты
-            progressSpan.innerText = ` [Downloading: ${event.loaded} Bytes...]`;
-        }
-    };
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Failed to fetch repository contents');
+        
+        const files = await response.json();
+        
+        // Фильтруем файлы, оставляя только .json и исключая сам index.html
+        const jsonFiles = files.filter(file => file.name.endsWith('.json') && file.type === 'file');
 
-    // Когда файл полностью скачан в оперативную память браузера
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            progressSpan.innerText = ' [Done!]';
-            
-            // Создаем виртуальную ссылку для принудительного сохранения файла на Mac
-            const blob = xhr.response;
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = fileName; // Атрибут, заставляющий именно скачивать, а не открывать
-            
-            document.body.appendChild(link);
-            link.click(); // Имитируем клик
-            document.body.removeChild(link);
-            
-            // Возвращаем ссылку в рабочее состояние через пару секунд
-            setTimeout(() => {
-                progressSpan.innerText = '';
-                element.style.pointerEvents = 'auto';
-            }, 2000);
-        } else {
-            progressSpan.innerText = ' [Error!]';
-            element.style.pointerEvents = 'auto';
-        }
-    };
+        // Пересобираем список ссылок. Атрибут download гарантирует скачивание без открытия в новой вкладке.
+        let htmlContent = '<a href="../">../</a>\n';
+        jsonFiles.forEach(file => {
+            htmlContent += `📄 <a href="${file.name}" download="${file.name}">${file.name}</a>\n`;
+        });
 
-    xhr.onerror = function() {
-        progressSpan.innerText = ' [Connection Error]';
-        element.style.pointerEvents = 'auto';
-    };
-
-    xhr.send();
+        fileListElement.innerHTML = htmlContent;
+    } catch (error) {
+        // Фолбэк-вариант на случай превышения лимитов API у гостя — выводим базовый файл
+        fileListElement.innerHTML = `<a href="../">../</a>\n📄 <a href="fastfetch.json" download>fastfetch.json</a>\n\n[Note: Dynamic listing temporary unavailable]`;
+        console.error('Aero Registry Error:', error);
+    }
 }
+
+// Запускаем автоматический поиск файлов при открытии страницы
+loadManifests();
 </script>
 
 </body>
