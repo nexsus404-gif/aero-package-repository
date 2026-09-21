@@ -27,6 +27,7 @@
         a {
             color: #0000ee;
             text-decoration: none;
+            cursor: pointer;
         }
         a:hover {
             text-decoration: underline;
@@ -34,6 +35,12 @@
         .meta {
             color: #555555;
             font-size: 0.9em;
+        }
+        /* Стиль для анимации и текста загрузки */
+        .progress-text {
+            color: #008800;
+            font-weight: bold;
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -43,10 +50,70 @@
 <hr>
 <pre>
 <a href="../">../</a>
-📄 <a href="fastfetch.json">fastfetch.json</a>
+📄 <a onclick="downloadWithProgress('fastfetch.json', this)">fastfetch.json</a><span id="fastfetch.json-progress" class="progress-text"></span>
 </pre>
 <hr>
 <div class="meta">Aero Package Registry Server / Powered by GitHub Pages</div>
+
+<script>
+function downloadWithProgress(fileName, element) {
+    // Чтобы пользователь не кликал много раз во время загрузки
+    if (element.style.pointerEvents === 'none') return;
+    element.style.pointerEvents = 'none';
+    
+    const progressSpan = document.getElementById(fileName + '-progress');
+    progressSpan.innerText = ' [Connecting...]';
+
+    // Используем XMLHttpRequest для отслеживания загрузки в байтах
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', fileName, true);
+    xhr.responseType = 'blob'; // Качаем как бинарный объект
+
+    // Событие продвижения загрузки
+    xhr.onprogress = function(event) {
+        if (event.lengthComputable) {
+            // Если сервер передал размер файла, показываем Прогресс / Всего
+            progressSpan.innerText = ` [Downloading: ${event.loaded} / ${event.total} Bytes]`;
+        } else {
+            // Если точный размер неизвестен, просто инкрементируем скачанные байты
+            progressSpan.innerText = ` [Downloading: ${event.loaded} Bytes...]`;
+        }
+    };
+
+    // Когда файл полностью скачан в оперативную память браузера
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            progressSpan.innerText = ' [Done!]';
+            
+            // Создаем виртуальную ссылку для принудительного сохранения файла на Mac
+            const blob = xhr.response;
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName; // Атрибут, заставляющий именно скачивать, а не открывать
+            
+            document.body.appendChild(link);
+            link.click(); // Имитируем клик
+            document.body.removeChild(link);
+            
+            // Возвращаем ссылку в рабочее состояние через пару секунд
+            setTimeout(() => {
+                progressSpan.innerText = '';
+                element.style.pointerEvents = 'auto';
+            }, 2000);
+        } else {
+            progressSpan.innerText = ' [Error!]';
+            element.style.pointerEvents = 'auto';
+        }
+    };
+
+    xhr.onerror = function() {
+        progressSpan.innerText = ' [Connection Error]';
+        element.style.pointerEvents = 'auto';
+    };
+
+    xhr.send();
+}
+</script>
 
 </body>
 </html>
