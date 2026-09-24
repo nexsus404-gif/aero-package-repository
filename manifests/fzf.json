@@ -1,6 +1,6 @@
 {
   "name": "fzf",
-  "description": "A command-line fuzzy finder. Ultra-fast and interactive. Written in Go.fzf",
+  "description": "A command-line fuzzy finder. Ultra-fast and interactive. Written in Go.",
   "versions": {
     "0.74.4": {
       "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/fzf-macos-intel.tar.gz",
