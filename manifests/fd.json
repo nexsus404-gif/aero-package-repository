@@ -1,0 +1,10 @@
+{
+  "name": "fd",
+  "description": "A simple, fast and user-friendly alternative to 'find'. Written in Rust",
+  "versions": {
+    "10.5.0": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/fd-macos-intel.tar.gz",
+      "sha256": "7e31028c62c6955877735d0406807aa484c2a5e6f86235a59e26c29c301da590"
+    }
+  }
+}
