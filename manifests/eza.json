@@ -1,0 +1,10 @@
+{
+  "name": "eza",
+  "description": "A modern, highly customizable alternative to 'ls'. Written in Rust.",
+  "versions": {
+    "0.23.5": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/eza-macos-intel.tar.gz",
+      "sha256": "295f6502cf02fe2d14f3bc3fd74fbf322439c7aea34edd4bc615b36123c951b6"
+    }
+  }
+}
