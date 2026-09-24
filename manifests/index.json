@@ -1,4 +1,1 @@
-["fastfetch"]
-["bat"]
-["ripgrep"]
-["fd"]
+["fastfetch", "ripgrep", "bat", "fd"]
