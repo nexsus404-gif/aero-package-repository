@@ -1,0 +1,10 @@
+{
+  "name": "git",
+  "description": "Git 2.47 — modern version control, replaces macOS Git 2.39",
+  "versions": {
+    "2.47.1": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/git-macos-intel.tar.gz",
+      "sha256": "93d02007f3bd29733c32b535a9bfe1d80b22997eec7463cf0eb6d8c62cbe2a55"
+    }
+  }
+}
