@@ -1,0 +1,10 @@
+{
+  "name": "vim",
+  "description": "Vim 9.1 — modern replacement for macOS Vim 8.2 (LSP, improved syntax)",
+  "versions": {
+    "9.1.0": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/vim-macos-intel.tar.gz",
+      "sha256": "a44b485415293e051154f61b7fcbb421fb47c36777c7ca23be19975078375732"
+    }
+  }
+}
