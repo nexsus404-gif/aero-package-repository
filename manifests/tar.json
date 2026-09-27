@@ -1,0 +1,10 @@
+{
+  "name": "tar",
+  "description": "GNU Tar 1.35 — modern replacement for macOS bsdtar (Linux compatibility)",
+  "versions": {
+    "1.35.0": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/tar-macos-intel.tar.gz",
+      "sha256": "2e8b66ad77ed77af7be62da7c46929ad97ac26eb51541586573051053eea22a0"
+    }
+  }
+}
