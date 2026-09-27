@@ -1,0 +1,10 @@
+{
+  "name": "json",
+  "description": "An interactive, real-time alternative to 'top'. Written in C.",
+  "versions": {
+    "3.5.3": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/htop-macos-intel.tar.gz",
+      "sha256": "6ace2bae386ffa8bb0218808d7d3b784134bfcbddd591c19079e735a1f70806a"
+    }
+  }
+}
