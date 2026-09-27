@@ -1,0 +1,10 @@
+{
+  "name": "grep",
+  "description": "GNU grep 3.11 — modern replacement for macOS BSD grep (2009)",
+  "versions": {
+    "3.11.0": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/grep-macos-intel.tar.gz",
+      "sha256": "9c877023141ff9609825fdde8f2b6081f78b2d9901377cde779f31f40a990b85"
+    }
+  }
+}
