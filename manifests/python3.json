@@ -1,0 +1,10 @@
+{
+  "name": "python3",
+  "description": "Python 3.12 — modern replacement for macOS Python 3.9 (f-strings, performance)",
+  "versions": {
+    "3.12.7": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/python3-macos-intel.tar.gz",
+      "sha256": "16e0e268b0d8234f3c26d5cdee6b72b9433cf29395f65d205ed76ebe4b6cc6e4"
+    }
+  }
+}
