@@ -2,7 +2,7 @@
   "name": "nano",
   "description": "A modeless, user-friendly text editor with syntax highlighting and shortcut guides",
   "versions": {
-    "9.2": {
+    "9.2.0": {
       "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/nano-macos-intel.tar.gz",
       "sha256": "03dba3a77dbfd782d609adb5be19611c5e283d14a12231ea1f12c0fe450d2e43"
     }
