@@ -1,0 +1,10 @@
+{
+  "name": "bash",
+  "description": "GNU Bourne-Again Shell v5.2 — modern replacement for macOS Bash 3.2",
+  "versions": {
+    "5.2.37": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/bash-macos-intel.tar.gz",
+      "sha256": "9cbcfad9691456d9a09afa506efbc7dfd18dbef64665405ba8e00d6251a2bd75"
+    }
+  }
+}
