@@ -1,0 +1,10 @@
+{
+  "name": "gawk",
+  "description": "GNU Awk 5.3 — full-featured awk replacement for macOS nawk/mawk",
+  "versions": {
+    "5.3.1": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/gawk-macos-intel.tar.gz",
+      "sha256": "71fbf7c02303f0579d53b265f65f2fa1a6fafbf61e6d5ae564c083a7bdc5f491"
+    }
+  }
+}
