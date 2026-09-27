@@ -1,0 +1,10 @@
+{
+  "name": "tree",
+  "description": "Tree 2.x — recursive directory listing program for macOS",
+  "versions": {
+    "2.1.3": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/tree-macos-intel.tar.gz",
+      "sha256": "5d785ba3404096f79eb72372313020c86a413818819b8633e37e9e0388f1eb6c"
+    }
+  }
+}
