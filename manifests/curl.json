@@ -1,0 +1,10 @@
+{
+  "name": "curl",
+  "description": "cURL 8.12 — modern replacement for macOS curl (HTTP/3, TLS 1.3)",
+  "versions": {
+    "8.12.0": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/curl-macos-intel.tar.gz",
+      "sha256": "8deb21c5856ad4d9215f243e71dbb1ae2740646c2db77492680721282595fd20"
+    }
+  }
+}
