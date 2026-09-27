@@ -1,0 +1,10 @@
+{
+  "name": "sed",
+  "description": "GNU sed 4.9 — fixes BSD sed -i incompatibility on macOS",
+  "versions": {
+    "4.9.0": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/sed-macos-intel.tar.gz",
+      "sha256": "91bbc23541ecc64f3e8a4edfcef034c04db392d336320179221e7c8a4bdaf9dd"
+    }
+  }
+}
