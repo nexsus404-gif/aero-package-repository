@@ -1,1 +1,10 @@
-
+{
+  "name": "make",
+  "description": "GNU Make 4.4 — modern replacement for macOS Make 3.81 (2006)",
+  "versions": {
+    "4.4.1": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/make-macos-intel.tar.gz",
+      "sha256": "a4cf86734fd91398d0a55c421296291e52e184614cb09e2f18016f03dcb2d587"
+    }
+  }
+}
