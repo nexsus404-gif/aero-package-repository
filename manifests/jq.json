@@ -1,0 +1,10 @@
+{
+  "name": "jq",
+  "description": "jq 1.7 — lightweight and flexible command-line JSON processor",
+  "versions": {
+    "1.7.1": {
+      "url": "https://github.com/nexsus404-gif/aero-package-repository/releases/download/binaries/jq-macos-intel.tar.gz",
+      "sha256": "ef5ef06ede9d0b51943df3ac480dbf7cfc50861391375c4b38e04cad4d350ce8"
+    }
+  }
+}
